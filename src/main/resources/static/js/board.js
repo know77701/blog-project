@@ -7,23 +7,23 @@ let index ={
 	
 	save: function(){
 		let data = {
-			username: $("#username").val(),
-			password: $("#password").val(),
-			email: $("#email").val(),
+			title: $("#title").val(),
+			content: $("#content").val(),
 		}
 		
+		// ajax 호출 시 default 비동기 호출
 		$.ajax({
 			type:"POST",
-			url: "/auth/join",
+			url: "/api/board",
 			data : JSON.stringify(data),
 			contentType : "application/json;charset=utf-8"
 		}).done(function(res){
-			alert("회원가입 완료");
+			alert("글쓰기 완료");
 			location.href="/";
 		}).fail(function(err){
 			console.log(JSON.stringify(err));
 		});
-	}
+	},
 }
 
 index.init();

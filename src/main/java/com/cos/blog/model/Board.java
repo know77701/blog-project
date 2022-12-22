@@ -38,7 +38,6 @@ public class Board {
 	@Lob
 	private String content;
 	
-	@ColumnDefault("0")
 	private int count;
 	
 	@ManyToOne // Many = Board, User = One
