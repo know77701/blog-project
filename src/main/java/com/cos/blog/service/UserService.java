@@ -28,9 +28,19 @@ public class UserService {
 		user.setRole(RoleType.USER);
 		userRepository.save(user);
 	}
+
+	@Transactional
+	public void updateUser(User requestUser) {
+		User user = userRepository.findById(requestUser.getId())
+				.orElseThrow(() ->{
+					return new IllegalArgumentException("회원찾기 실패");
+				});
+		System.out.println(requestUser);
+		String password = requestUser.getPassword();
+		String encPassword = encoder.encode(password);
+		
+		user.setPassword(encPassword);
+		user.setEmail(requestUser.getEmail());
+	}
 	
-//	@Transactional(readOnly = true) // Select 할 때 트랜잭션 시작, 서비스 종료시에 트랜잭션 종료(정합성)
-//	public User login(User user) {
-//		return	userRepository.findByusernameAndPassword(user.getUsername(), user.getPassword());
-//	}
 }
